@@ -8,3 +8,9 @@ Just serve the files with a web server and visit the home page in your phone.
 ```
 $ python -mSimpleHTTPServer 8000 0.0.0.0 # then visit YOUR_IP:8000 on your browser
 ```
+
+## Contributing
+
+The app uses Google's [Material Design Lite](https://getmdl.io/) framework for simulating being a native app ;-)
+
+You can get info about the available components on the [Components page](https://getmdl.io/components/index.html).
