@@ -21,7 +21,15 @@
       <script src="./bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
 
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap"
+            async defer></script>
 
+    <style>
+      #map {
+        height: 200px;
+        width: 100%;
+      }
+    </style>
 
   </head>
   <body>
@@ -68,6 +76,10 @@
               <label class="mdl-textfield__label" for="where">Where</label>
             </div>
 
+            <div id="map">
+
+            </div>
+
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
   <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
             id="what"></textarea>
@@ -86,6 +98,26 @@
     </div>
     <script>
       $('#date').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
+      function initMap() {
+        var myLatLng = {lat: 17.013721, lng: 95.987924};
+
+        // Create a map object and specify the DOM element for display.
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          scrollwheel: false,
+          zoom: 14
+        });
+
+        // Create a marker and set its position.
+        var marker = new google.maps.Marker({
+          map: map,
+          position: myLatLng,
+          title: 'Hello World!'
+        });
+      }
+
+      initMap();
     </script>
   </body>
 </html>
