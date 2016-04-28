@@ -42,6 +42,15 @@
       }
     };
 
+    var dismissMessage = function(messageId, event) {
+      $.ajax('http://52.201.204.236:9200/epihack/volunteer_event/' + messageId, {
+        type: 'DELETE',
+        success: function() {
+          $('#inbox-item-' + messageId).hide()
+        }
+      })
+    };
+
     var createInboxMessage = function(messageIndex, message) {
       var volunteer = volunteers[message.phone_number];
       if(volunteer === undefined) {
@@ -80,7 +89,7 @@
             )
           )
           .append(
-            $('<li>').attr('class', 'mdl-menu__item').text("Dismiss message")
+            $('<li>').attr('class', 'mdl-menu__item').text("Dismiss message").click(dismissMessage.bind(this, messageIndex))
           )
       );
       var volunteerPicture = null;
@@ -89,7 +98,7 @@
       } else {
         volunteerPicture = $('<i>').attr('class', 'material-icons mdl-list__item-avatar').text('person')
       }
-      return $('<li>').attr('class', 'mdl-list__item mdl-list__item--three-line').append(
+      return $('<li>').attr('class', 'mdl-list__item mdl-list__item--three-line').attr('id', 'inbox-item-' + messageIndex).append(
         $('<span>').attr('class', 'mdl-list__item-primary-content').append(
           volunteerPicture
         ).append(
@@ -109,9 +118,9 @@
       $.get('http://52.201.204.236:9200/epihack/volunteer_event/_search?size=1000&sort=created_at:desc', function(data){
         var hits = data.hits.hits;
         $(hits).each(function(hitIndex) {
-          var hitSource = hits[hitIndex]["_source"];
+          var hit = hits[hitIndex];
           $('#inbox-list').append(
-            createInboxMessage(hitIndex, hitSource)
+            createInboxMessage(hit["_id"], hit["_source"])
           );
         });
         componentHandler.upgradeAllRegistered();
