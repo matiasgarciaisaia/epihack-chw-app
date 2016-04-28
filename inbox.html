@@ -20,50 +20,18 @@
         "picture": "data/images/sona-100px.jpg"
       },
       "": {
-        "name": "Matias Garcia",
-        "picture": "data/images/mgarcia-100px.jpg"
+        "name": "Unknown",
+        // "picture": "data/images/mgarcia-100px.jpg"
       }
     }
-    var inboxData = [
-      {
-        "message": "Mama",
-        "flags": [ ],
-        "on_set_date": "2016-04-28T10:57:29.115Z",
-        "phone_number": "+1 525 1242 325",
-        "created_at": "2016-04-28T10:59:50.376Z",
-        "updated_at": "2016-04-28T10:59:50.376Z"
-      }, {
-        "audio": "http://verboice.instedd.org/feeds/f5e57352-58b0-8c72-56e9-fa3e87c0063f/recording/5420.wav",
-        "flags": [
-        "Pregnant Women"
-        ],
-        "on_set_date": "2016-04-28T13:40:03.419Z",
-        "created_at": "2016-04-28T13:41:01.086Z",
-        "updated_at": "2016-04-28T13:41:01.086Z"
+
+    var cleanPhoneNumber = function(number) {
+      if(number && number.length > 0) {
+        return number;
+      } else {
+        return "+14252698378";
       }
-      // ,
-      // {
-      //   "type": "text",
-      //   "phone": "+1 525 1242 325",
-      //   "message": "Today three kids skipped classes because they were feeling sick. It seems they ate some bad food last night or something.",
-      //   "date": "2016-04-27 11:01:02"
-      // },
-      // {
-      //   "type": "voice",
-      //   "phone": "+1 115 215 3333",
-      //   "audio": "data/audios/test.mp3",
-      //   "date": "2016-04-27 16:01:02"
-      // },
-      // {
-      //   "type": "voice",
-      //   "phone": "+1 115 215 553233",
-      //   "audio": "http://verboice.instedd.org/feeds/f5e57352-58b0-8c72-56e9-fa3e87c0063f/recording/5420.wav",
-      //   "date": "2016-04-27 16:01:02"
-      // },
-    ];
-    audiojs.events.ready(function() {
-      var as = audiojs.createAll();
-    });
+    };
 
     var createInboxMessage = function(messageIndex, message) {
       var volunteer = volunteers[message.phone_number];
@@ -72,14 +40,13 @@
       }
       var secondLine = null;
       var actionButtons = $('<span>').attr('class', 'mdl-list__item-secondary-action');
+      debugger;
       if(message.audio) {
         secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').append(
           $('<audio>').attr('src', message.audio).attr('preload', false)
         )
       } else {
         secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').text(message.message);
-      // } else {
-
       }
       actionButtons.append(
         $('<button>')
@@ -98,7 +65,7 @@
             )
           )
           .append(
-            $('<a>').attr('href', 'tel:' + message.phone).append(
+            $('<a>').attr('href', 'tel:' + cleanPhoneNumber(message.phone_number)).append(
               $('<li>').attr('class', 'mdl-menu__item').text("Call volunteer")
             )
           )
@@ -120,7 +87,7 @@
         ).append(
           secondLine
         ).append(
-          $('<span>').attr('class', 'mdl-list__item-text-body').text(message.date)
+          $('<span>').attr('class', 'mdl-list__item-text-body').text(message.on_set_date)
         )
       ).append(
         actionButtons
@@ -128,14 +95,20 @@
     }
 
     $(document).ready(function() {
-      $(inboxData).each(function(messageIndex) {
-        var message = inboxData[messageIndex];
-        var inboxMessage = createInboxMessage(messageIndex, message);
 
-        $('#inbox-list').append(
-          inboxMessage
-        );
-      })
+      $.get('http://52.201.204.236:9200/epihack/volunteer_event/_search?size=1000', function(data){
+        var hits = data.hits.hits;
+        $(hits).each(function(hitIndex) {
+          var hitSource = hits[hitIndex]["_source"];
+          $('#inbox-list').append(
+            createInboxMessage(hitIndex, hitSource)
+          );
+        });
+        componentHandler.upgradeAllRegistered();
+        audiojs.events.ready(function() {
+          audiojs.createAll();
+        });
+      });
     });
     </script>
   </head>
