@@ -5,4 +5,7 @@
 
 .mdl-layout__header .mdl-layout__drawer-button {
     background-color: #F40B31;
+    background-image: url("images/icon.png" );
+    background-repeat: no-repeat;
+    background-position: center;
 }
