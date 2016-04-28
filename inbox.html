@@ -4,6 +4,7 @@
     <script src="./vendor/material/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./vendor/audiojs/audio.min.js"></script>
     <script type="text/javascript">
     var inboxData = [
       {
@@ -19,14 +20,58 @@
         "name": "May Lun See",
         "picture": "http://localhost:8000/images/may-lun-see.jpg",
         "phone": "+1 115 215 3333",
-        "audio": "http://localhost:8000/audios/some-audio-report.mp3",
+        "audio": "data/audios/test.mp3",
         "date": "2016-04-27 16:01:02"
-      }
+      },
+      {
+        "type": "voice",
+        "name": "Jay Men Wey",
+        "picture": "http://localhost:8000/images/may-lun-see.jpg",
+        "phone": "+1 115 215 553233",
+        "audio": "data/audios/long-message.mp3",
+        "date": "2016-04-27 16:01:02"
+      },
     ];
+    audiojs.events.ready(function() {
+      var as = audiojs.createAll();
+    });
     $(document).ready(function() {
       $(inboxData).each(function(messageIndex) {
         var message = inboxData[messageIndex];
-        console.log(message);
+        var secondLine = null;
+        var actionButtons = $('<span>').attr('class', 'mdl-list__item-secondary-action');
+        if(message.type == 'text') {
+          secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').text(message.message);
+        } else {
+          secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').append(
+            $('<audio>').attr('src', message.audio).attr('preload', false)
+          )
+        }
+        actionButtons.append(
+          $('<button>')
+            .attr('class', 'mdl-button mdl-js-button mdl-button--icon')
+            .attr('id', 'demo-menu-lower-right-' + messageIndex)
+            .append(
+              $('<i>').attr('class', 'material-icons').text('more_vert')
+            )
+        ).append(
+          $('<ul>')
+            .attr('class', 'mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect')
+            .attr('for', 'demo-menu-lower-right-' + messageIndex)
+            .append(
+              $('<a>').attr('href', 'event.html?message=' + JSON.stringify(message)).append(
+                $('<li>').attr('class', 'mdl-menu__item').text("Report the event")
+              )
+            )
+            .append(
+              $('<a>').attr('href', 'tel:' + message.phone).append(
+                $('<li>').attr('class', 'mdl-menu__item').text("Call volunteer")
+              )
+            )
+            .append(
+              $('<li>').attr('class', 'mdl-menu__item').text("Dismiss message")
+            )
+        );
         $('#inbox-list').append(
           $('<li>').attr('class', 'mdl-list__item mdl-list__item--three-line').append(
             $('<span>').attr('class', 'mdl-list__item-primary-content').append(
@@ -34,36 +79,12 @@
             ).append(
               $('<span>').text(message.name)
             ).append(
-              $('<span>').attr('class', 'mdl-list__item-text-body').text(message.message)
+              secondLine
             ).append(
               $('<span>').attr('class', 'mdl-list__item-text-body').text(message.date)
             )
           ).append(
-            $('<span>').attr('class', 'mdl-list__item-secondary-action').append(
-              $('<button>')
-                .attr('class', 'mdl-button mdl-js-button mdl-button--icon')
-                .attr('id', 'demo-menu-lower-right-' + messageIndex)
-                .append(
-                  $('<i>').attr('class', 'material-icons').text('more_vert')
-                )
-            ).append(
-              $('<ul>')
-                .attr('class', 'mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect')
-                .attr('for', 'demo-menu-lower-right-' + messageIndex)
-                .append(
-                  $('<a>').attr('href', 'event.html?message=' + JSON.stringify(message)).append(
-                    $('<li>').attr('class', 'mdl-menu__item').text("Report the event")
-                  )
-                )
-                .append(
-                  $('<a>').attr('href', 'tel:' + message.phone).append(
-                    $('<li>').attr('class', 'mdl-menu__item').text("Call volunteer")
-                  )
-                )
-                .append(
-                  $('<li>').attr('class', 'mdl-menu__item').text("Dismiss message")
-                )
-            )
+            actionButtons
           )
         );
       })

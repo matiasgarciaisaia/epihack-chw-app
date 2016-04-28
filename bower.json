@@ -4,7 +4,8 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "bootstrap-material-datetimepicker": "~2.7.1",
-    "momentjs": "2.10.6"
+    "momentjs": "2.10.6",
+    "jPlayer": "jplayer#^2.9.2"
   },
   "private": true,
   "resolutions": {
