@@ -5,7 +5,11 @@
     "jquery": "~2.1.4",
     "bootstrap-material-datetimepicker": "~2.7.1",
     "momentjs": "2.10.6",
-    "react": "^15.0.1"
+    "react": "^15.0.1",
+    "getmdl-select": "*"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "getmdl-select": "*"
+  }
 }

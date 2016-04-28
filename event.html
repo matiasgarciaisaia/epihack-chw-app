@@ -16,15 +16,17 @@
     <script src="./vendor/material/material.min.js"></script>
 
 
-    <script src="./vendor/getmdl-select.min.js"></script>
+    <script src="./bower_components/getmdl-select/getmdl-select.min.js"></script>
     <script src="./bower_components/momentjs/moment.js"></script>
     <script src="./bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap"
-            async defer></script>
-
     <link rel="stylesheet" href="main.css">
+
+    <style>
+        #map {
+            height: 300px;
+        }
+    </style>
 
 </head>
 <body>
@@ -71,7 +73,18 @@
                 <label class="mdl-textfield__label" for="disease">Disease</label>
                 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="disease">
                     <li class="mdl-menu__item" data-val="unknown">Unknown</li>
-                    <li class="mdl-menu__item" data-val="influenza">Influenza</li>
+                    <li class="mdl-menu__item" data-val="influenza">Acute Diarrhoea</li>
+                    <li class="mdl-menu__item" data-val="influenza">Measles</li>
+                    <li class="mdl-menu__item" data-val="influenza">Fever with Rash</li>
+                    <li class="mdl-menu__item" data-val="influenza">Acute Meningitis</li>
+                    <li class="mdl-menu__item" data-val="influenza">Acute Encephalitis</li>
+                    <li class="mdl-menu__item" data-val="influenza">Acute Jaundice</li>
+                    <li class="mdl-menu__item" data-val="influenza">Dysentery</li>
+                    <li class="mdl-menu__item" data-val="influenza">Food Poisoning</li>
+                    <li class="mdl-menu__item" data-val="influenza">Whooping cough</li>
+                    <li class="mdl-menu__item" data-val="influenza">SARI</li>
+                    <li class="mdl-menu__item" data-val="influenza">ILI</li>
+
                 </ul>
             </div>
 
@@ -123,6 +136,8 @@
     $('#date').bootstrapMaterialDatePicker({weekStart: 0, time: false});
 
     function initMap() {
+        console.log( "ready!" );
+
         var myLatLng = {lat: 17.013721, lng: 95.987924};
 
         // Create a map object and specify the DOM element for display.
@@ -138,9 +153,10 @@
             position: myLatLng,
             title: 'Hello World!'
         });
-    }
-
-    initMap();
+    };
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap">
+</script>
+
 </body>
 </html>
