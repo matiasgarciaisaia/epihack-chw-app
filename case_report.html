@@ -43,52 +43,58 @@
     </div>
     <main class="mdl-layout__content">
         <div class="page-content">
-            <form style="padding: 8px 8px 8px 8px;">
+            <form id="case_form" style="padding: 8px 8px 8px 8px;">
 
                 <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="name">
+                    <input class="mdl-textfield__input" name="name" type="text" id="name">
                     <label class="mdl-textfield__label" for="name">Name</label>
                 </div>
 
                 <div class="mdl-textfield  mdl-js-textfield mdl-textfield--floating-label">
-
-                    <input class="mdl-textfield__input" type="number" id="age">
+                    <input class="mdl-textfield__input" name="age" type="number" id="age">
                     <label class="mdl-textfield__label" for="age">Age</label>
                 </div>
 
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
-                    <span class="mdl-radio__label">Male</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                    <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
-                    <span class="mdl-radio__label">Female</span>
-                </label>
+                <div>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                        <input type="radio" id="option-1" class="mdl-radio__button" name="gender" value="M" checked>
+                        <span class="mdl-radio__label">Male</span>
+                    </label>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                        <input type="radio" id="option-2" class="mdl-radio__button" name="gender" value="F">
+                        <span class="mdl-radio__label">Female</span>
+                    </label>
+                </div>
 
 
                 <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                    <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6" id="address"></textarea>
+                    <textarea class="mdl-textfield__input" name="address" type="text" rows="3" maxrows="6" id="address"></textarea>
                     <label class="mdl-textfield__label" for="address">Address</label>
                 </div>
 
                 <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="date">
+                    <input class="mdl-textfield__input" name="date" type="text" id="date">
                     <label class="mdl-textfield__label" for="date">Date onset</label>
                 </div>
 
                 <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="im">
+                    <input class="mdl-textfield__input" name="immunization_status" type="text" id="im">
                     <label class="mdl-textfield__label" for="im">IM</label>
                 </div>
 
                 <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="hospital">
+                    <input class="mdl-textfield__input" name="hospital" type="text" id="hospital">
                     <label class="mdl-textfield__label" for="hospital">Hospital</label>
+                </div>
+
+                <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                    <textarea class="mdl-textfield__input" name="description" type="text" rows="3" maxrows="6" id="what"></textarea>
+                    <label class="mdl-textfield__label" for="what">Description</label>
                 </div>
 
                 <div>
                     <!-- Accent-colored raised button with ripple -->
-                    <button id="submit" class=" mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    <button class="submit_button mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect ">
                         Send
                     </button>
                 </div>
@@ -109,6 +115,42 @@
             }
             console.log(data);
         })
+    })
+
+
+    function generateLatLng() {
+        lat = 17.013721;
+        lng = 95.987924;
+
+        lat = lat + Math.floor(Math.random()*10000000) / 10000000;
+        lng = lng + Math.floor(Math.random()*10000000) / 10000000;
+
+        return lat + ',' + lng;
+    }
+
+    $('#case_form').submit(function(evt) {
+        console.log('submit');
+
+        data = $('#case_form').serializeObject();
+        data.latlng = generateLatLng();
+        data.date_report_summitted = moment().toISOString().substring(0,10);
+
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function(data){
+                console.log("succeeded");
+            },
+            error: function(){
+                console.log("failed");
+            },
+            processData: false,
+            type: 'POST',
+            url: 'http://52.201.204.236:9200//epihack/case-report/'
+        });
+
+        evt.preventDefault();
     })
 </script>
 </body>

@@ -5,7 +5,11 @@
 
 .mdl-layout__header .mdl-layout__drawer-button {
     background-color: #F40B31;
-    background-image: url("images/icon.png" );
+    background-image: url("images/icon_white.png" );
     background-repeat: no-repeat;
     background-position: center;
+}
+
+.submit_button {
+    background-color: #75F0FD;
 }

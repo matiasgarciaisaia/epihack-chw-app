@@ -126,7 +126,7 @@
 
             <div>
                 <!-- Accent-colored raised button with ripple -->
-                <button class=" mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                <button class="submit_button mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     Send
                 </button>
             </div>
@@ -157,6 +157,7 @@
             title: 'Hello World!'
         });
     };
+
     function generateLatLng() {
         lat = 17.013721;
         lng = 95.987924;
@@ -172,7 +173,7 @@
 
         data = $('#event_form').serializeObject();
         data.latlng = generateLatLng();
-        data.report_date = moment().toISOString().substring(0,10);
+        data.date_report_summitted = moment().toISOString().substring(0,10);
 
         $.ajax({
             contentType: 'application/json',
@@ -192,6 +193,7 @@
         evt.preventDefault();
     })
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap">
 </script>
 
