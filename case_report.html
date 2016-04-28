@@ -1,0 +1,95 @@
+<html>
+<head>
+    <link rel="stylesheet" href="./vendor/material/material.min.css">
+    <link ref="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./vendor/getmdl-select.min.css"/>
+    <link rel="stylesheet"
+          href="./bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./vendor/material/material.min.js"></script>
+
+
+    <script src="./vendor/getmdl-select.min.js"></script>
+    <script src="./bower_components/momentjs/moment.js"></script>
+    <script src="./bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+</head>
+<body>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Case Based Report</span>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Health-a-thon</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="index.html">Home</a>
+            <a class="mdl-navigation__link" href="#">Inbox</a>
+            <a class="mdl-navigation__link selected" href="immediate_report.html">Report</a>
+            <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
+            <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
+            <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <form style="padding: 8px 8px 8px 8px;">
+
+                <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="name">
+                    <label class="mdl-textfield__label" for="name">Name</label>
+                </div>
+
+                <div class="mdl-textfield  mdl-js-textfield mdl-textfield--floating-label">
+
+                    <input class="mdl-textfield__input" type="number" id="age">
+                    <label class="mdl-textfield__label" for="age">Age</label>
+                </div>
+
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                    <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
+                    <span class="mdl-radio__label">Male</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                    <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                    <span class="mdl-radio__label">Female</span>
+                </label>
+
+
+                <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                    <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6" id="address"></textarea>
+                    <label class="mdl-textfield__label" for="address">Address</label>
+                </div>
+
+                <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="date">
+                    <label class="mdl-textfield__label" for="date">Date onset</label>
+                </div>
+
+                <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="im">
+                    <label class="mdl-textfield__label" for="im">IM</label>
+                </div>
+
+                <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="hospital">
+                    <label class="mdl-textfield__label" for="hospital">Hospital</label>
+                </div>
+
+            </form>
+
+
+        </div>
+    </main>
+</div>
+<script>
+    $('#date').bootstrapMaterialDatePicker({weekStart: 0, time: false});
+</script>
+</body>
+</html>

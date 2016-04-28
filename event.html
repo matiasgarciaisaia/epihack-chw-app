@@ -1,123 +1,151 @@
 <html>
-  <head>
+<head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-      <link rel="stylesheet" href="./vendor/material/material.min.css">
-      <link ref="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-      <link rel="stylesheet" href="./vendor/getmdl-select.min.css"/>
-      <link rel="stylesheet" href="./bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"/>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./vendor/material/material.min.css">
+    <link ref="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./vendor/getmdl-select.min.css"/>
+    <link rel="stylesheet"
+          href="./bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
-
-      <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-      <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script src="./vendor/material/material.min.js"></script>
-
-
-      <script src="./vendor/getmdl-select.min.js"></script>
-      <script src="./bower_components/momentjs/moment.js"></script>
-      <script src="./bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./vendor/material/material.min.js"></script>
 
 
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap"
+    <script src="./vendor/getmdl-select.min.js"></script>
+    <script src="./bower_components/momentjs/moment.js"></script>
+    <script src="./bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap"
             async defer></script>
 
     <style>
-      #map {
-        height: 200px;
-        width: 100%;
-      }
+        #map {
+            height: 200px;
+            width: 100%;
+        }
     </style>
 
-  </head>
-  <body>
-    <!-- Always shows a header, even in smaller screens. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header class="mdl-layout__header">
+</head>
+<body>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <span class="mdl-layout-title">Event report</span>
+            <!-- Title -->
+            <span class="mdl-layout-title">Report</span>
         </div>
-      </header>
-      <div class="mdl-layout__drawer">
+    </header>
+    <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Health-a-thon</span>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="index.html">Home</a>
-          <a class="mdl-navigation__link" href="inbox.html">Inbox</a>
-          <a class="mdl-navigation__link selected" href="#">Event</a>
-          <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
-          <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
-          <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
+            <a class="mdl-navigation__link" href="index.html">Home</a>
+            <a class="mdl-navigation__link" href="inbox.html">Inbox</a>
+            <a class="mdl-navigation__link selected" href="immediate_report.html">Report</a>
+            <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
+            <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
+            <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
         </nav>
-      </div>
-      <main class="mdl-layout__content">
-        <form class="page-content">
+    </div>
+    <main class="mdl-layout__content">
+        <form class="page-content" style="padding: 8px 8px 8px 8px;">
+
+
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
+                <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
+                <span class="mdl-radio__label">Unusual Event</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
+                <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                <span class="mdl-radio__label">Cluster</span>
+            </label>
+            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
+                <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="3">
+                <span class="mdl-radio__label">Diaster</span>
+            </label>
+
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-              <input class="mdl-textfield__input mdl-textfield--full-width" value="" type="text" id="disease" readonly tabIndex="-1" data-val="BLR"/>
-              <label class="mdl-textfield__label" for="disease">Disease</label>
-              <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="disease">
-                <li class="mdl-menu__item" data-val="BLR">Influenza</li>
-                <li class="mdl-menu__item" data-val="RUS">TB</li>
-              </ul>
+                <input class="mdl-textfield__input mdl-textfield--full-width" value="" type="text" id="disease" readonly
+                       tabIndex="-1" data-val="BLR"/>
+                <label class="mdl-textfield__label" for="disease">Disease</label>
+                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="disease">
+                    <li class="mdl-menu__item" data-val="unknown">Unknown</li>
+                    <li class="mdl-menu__item" data-val="influenza">Influenza</li>
+                </ul>
             </div>
 
+            <!-- number of sick people -->
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="date">
-              <label class="mdl-textfield__label" for="date">Date</label>
+                <input class="mdl-textfield__input" type="number" id="sick">
+                <label class="mdl-textfield__label" for="sick">Number of sick people</label>
             </div>
 
 
+            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="number" id="death">
+                <label class="mdl-textfield__label" for="death">Number of death people</label>
+            </div>
+
 
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-              <input class="mdl-textfield__input" type="text" id="where">
-              <label class="mdl-textfield__label" for="where">Where</label>
+                <input class="mdl-textfield__input" type="text" id="where">
+                <label class="mdl-textfield__label" for="where">Location</label>
             </div>
 
             <div id="map">
 
             </div>
 
+
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-  <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
-            id="what"></textarea>
-              <label class="mdl-textfield__label" for="what">What</label>
+                <input class="mdl-textfield__input" type="text" id="date">
+                <label class="mdl-textfield__label" for="date">Date</label>
+            </div>
+
+            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6" id="what"></textarea>
+                <label class="mdl-textfield__label" for="what">Finding</label>
             </div>
 
             <div>
-              <!-- Accent-colored raised button with ripple -->
-              <button class=" mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-                Button
-              </button>
+                <!-- Accent-colored raised button with ripple -->
+                <button class=" mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    Send
+                </button>
             </div>
 
-        </form>
-      </main>
-    </div>
-    <script>
-      $('#date').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
 
-      function initMap() {
+        </form>
+    </main>
+</div>
+<script>
+    $('#date').bootstrapMaterialDatePicker({weekStart: 0, time: false});
+
+    function initMap() {
         var myLatLng = {lat: 17.013721, lng: 95.987924};
 
         // Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: myLatLng,
-          scrollwheel: false,
-          zoom: 14
+            center: myLatLng,
+            scrollwheel: false,
+            zoom: 14
         });
 
         // Create a marker and set its position.
         var marker = new google.maps.Marker({
-          map: map,
-          position: myLatLng,
-          title: 'Hello World!'
+            map: map,
+            position: myLatLng,
+            title: 'Hello World!'
         });
-      }
+    }
 
-      initMap();
-    </script>
-  </body>
+    initMap();
+</script>
+</body>
 </html>
