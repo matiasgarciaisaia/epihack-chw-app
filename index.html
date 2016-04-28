@@ -1,78 +1,101 @@
 <html>
-  <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <link rel="stylesheet" href="./vendor/material/material.min.css">
     <script src="./vendor/material/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="main.css">
-    <style>
-      body {
-        background-color: #ccc;
-      }
-      .tip-bar {
-        background-color: #F4Bc00;
-      }
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/handlebars/handlebars.min.js"></script>
 
-      .demo-card-square {
-          margin-top: 10px;
-          margin-bottom: 10px;
-          width: 100%;
-      }
+    <style>
+        body {
+            background-color: #ccc;
+        }
+
+        .tip-bar {
+            background-color: #F4Bc00;
+        }
+
+        .alert-bar {
+            background-color: #75F0FD;
+        }
+
+        .demo-card-square {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
 
     </style>
-  </head>
-  <body>
-    <!-- Always shows a header, even in smaller screens. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-      <header class="mdl-layout__header">
+</head>
+<body>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <span class="mdl-layout-title">Home</span>
+            <!-- Title -->
+            <span class="mdl-layout-title">Home</span>
         </div>
-      </header>
-      <div class="mdl-layout__drawer">
+    </header>
+    <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Health-a-thon</span>
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link selected" href="index.html">Home</a>
-          <a class="mdl-navigation__link" href="inbox.html">Inbox</a>
-          <a class="mdl-navigation__link" href="immediate_report.html">Report</a>
-          <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
-          <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
-          <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
+            <a class="mdl-navigation__link selected" href="index.html">Home</a>
+            <a class="mdl-navigation__link" href="inbox.html">Inbox</a>
+            <a class="mdl-navigation__link" href="immediate_report.html">Report</a>
+            <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
+            <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
+            <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
         </nav>
-      </div>
-      <main class="mdl-layout__content">
+    </div>
+    <main class="mdl-layout__content">
         <div class="page-content">
 
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__title mdl-card--expand">
-              <img src="images/tip.png" width="300">
-            </div>
-            <div class="mdl-card__supporting-text tip-bar">
-              <span style="font-weight: 900; font-size: 20px; color: black;">TIPS</span>
-            </div>
-          </div>
-
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__supporting-text">
-              <i class="material-icons">local_post_office</i>
-              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Aenan convallis.</span>
-            </div>
-          </div>
 
 
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-            <div class="mdl-card__supporting-text">
-              <i class="material-icons">local_post_office</i>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Aenan convallis.
-            </div>
-          </div>
+
 
         </div>
-      </main>
+    </main>
+</div>
+<script id="message-template" type="text/x-handlebars-template">
+    <div class="demo-card-square mdl-card mdl-shadow--2dp">
+
+        <div class="mdl-card__supporting-text alert-bar">
+            <span style="font-weight: 900; font-size: 20px; color: black;">ALERT</span>
+        </div>
+
+        <div class="mdl-card__supporting-text">
+            <i class="material-icons">local_post_office</i>
+            {{_source.message}}
+        </div>
     </div>
-  </body>
+</script>
+<script>
+    $(function() {
+
+        $.ajax({
+            url: 'http://52.201.204.236:9200/epihack/alert/_search?size=1000',
+            data: {},
+            success: function(data) {
+                console.log('get', data);
+                messages = data.hits.hits;
+                var source   = $("#message-template").html();
+                var template = Handlebars.compile(source);
+                htmls = '';
+                $.each(messages, function(idx, item) {
+                    console.log(idx, item);
+                    var html = template(item);
+                    htmls = htmls + html;
+                });
+
+                $("#message_container").html(htmls);
+            },
+            dataType: 'json'
+        });
+    });
+</script>
+</body>
 </html>

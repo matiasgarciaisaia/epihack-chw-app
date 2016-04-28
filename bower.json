@@ -7,7 +7,8 @@
     "momentjs": "2.10.6",
     "react": "^15.0.1",
     "getmdl-select": "*",
-    "jquery-serialize-object": "^2.5.0"
+    "jquery-serialize-object": "^2.5.0",
+    "handlebars": "^4.0.5"
   },
   "private": true,
   "devDependencies": {
