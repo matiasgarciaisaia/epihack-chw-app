@@ -42,7 +42,7 @@
         </div>
     </header>
     <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Health-a-thon</span>
+        <span class="mdl-layout-title">Myanmar CHW</span>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="index.html">Home</a>
             <a class="mdl-navigation__link" href="inbox.html">Inbox</a>
@@ -99,7 +99,7 @@
 
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" name="num_death" type="number" id="death">
-                <label class="mdl-textfield__label" for="death">Number of death people</label>
+                <label class="mdl-textfield__label" for="death">Number of dead people</label>
             </div>
 
 
@@ -128,6 +128,12 @@
                 <button class="submit_button mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     Send
                 </button>
+            </div>
+
+
+            <div id="save-snackbar" class="mdl-js-snackbar mdl-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button"></button>
             </div>
 
 
@@ -181,6 +187,11 @@
             dataType: 'json',
             success: function(data){
                 console.log("succeeded");
+                var obj = {
+                    message: 'Save Success.',
+                    timeout: 2000
+                }
+                document.querySelector('#save-snackbar').MaterialSnackbar.showSnackbar(obj);
             },
             error: function(){
                 console.log("failed");
