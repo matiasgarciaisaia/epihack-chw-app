@@ -1,16 +1,26 @@
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <link rel="stylesheet" href="./vendor/material/material.min.css">
     <script src="./vendor/material/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
-
+        a.noline {
+            text-decoration: none;
+            color: black;
+        }
         .mdl-layout__header-row {
             background-color: #F40B31;
         }
 
         .mdl-layout__header .mdl-layout__drawer-button {
             background-color: #F40B31;
+        }
+
+        .mdl-list__item {
+            border-top: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
         }
     </style>
 </head>
@@ -28,7 +38,7 @@
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="index.html">Home</a>
             <a class="mdl-navigation__link" href="#">Inbox</a>
-            <a class="mdl-navigation__link selected" href="immediate_report.html.html">Report</a>
+            <a class="mdl-navigation__link selected" href="immediate_report.html">Report</a>
             <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
             <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
             <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
@@ -38,11 +48,11 @@
         <div class="page-content">
             <ul class='mdl-list'>
                 <li class="mdl-list__item">
-                    <span>Unusual Event / Cluster / Diaster</span>
+                    <span class="mdl-list__item-primary-content">Unusual Event / Cluster / Diaster</span>
                     <a class="mdl-list__item-primary-action" href="event.html"><i class="material-icons">keyboard_arrow_right</i></a>
                 </li>
                 <li class="mdl-list__item">
-                    <span>Case Based</span>
+                    <span class="mdl-list__item-primary-content">Case Based</span>
                     <a class="mdl-list__item-primary-action" href="case_report_list.html"><i class="material-icons">keyboard_arrow_right</i></a>
                 </li>
             </ul>

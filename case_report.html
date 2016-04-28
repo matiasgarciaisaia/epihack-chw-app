@@ -1,8 +1,10 @@
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <link rel="stylesheet" href="./vendor/material/material.min.css">
     <link ref="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./vendor/getmdl-select.min.css"/>
+    <link rel="stylesheet" href="./bower_components/getmdl-select/getmdl-select.min.css"/>
     <link rel="stylesheet"
           href="./bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -13,7 +15,7 @@
     <script src="./vendor/material/material.min.js"></script>
 
 
-    <script src="./vendor/getmdl-select.min.js"></script>
+    <script src="./bower_components/getmdl-select/getmdl-select.min.js"></script>
     <script src="./bower_components/momentjs/moment.js"></script>
     <script src="./bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
@@ -86,7 +88,7 @@
 
                 <div>
                     <!-- Accent-colored raised button with ripple -->
-                    <button class=" mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                    <button id="submit" class=" mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
                         Send
                     </button>
                 </div>
@@ -99,6 +101,15 @@
 </div>
 <script>
     $('#date').bootstrapMaterialDatePicker({weekStart: 0, time: false});
+
+    $(function() {
+        $('#submit').on('click', function() {
+            data = {
+                name: $('#name').value()
+            }
+            console.log(data);
+        })
+    })
 </script>
 </body>
 </html>

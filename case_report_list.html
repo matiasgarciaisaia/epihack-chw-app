@@ -1,9 +1,22 @@
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <link rel="stylesheet" href="./vendor/material/material.min.css">
     <script src="./vendor/material/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="main.css">
+
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+
+
+    <style>
+        .mdl-list__item {
+            border-top: 1px solid #eeeeee;
+            border-bottom: 1px solid #eeeeee;
+        }
+    </style>
+
 </head>
 <body>
 <!-- Always shows a header, even in smaller screens. -->
@@ -29,24 +42,31 @@
         <div class="page-content">
             <ul class='mdl-list'>
                 <li class="mdl-list__item">
-                    <span>Acute Diarrhoea</span>
+                    <span class="mdl-list__item-primary-content">Acute Diarrhoea</span>
                     <a class="mdl-list__item-primary-action" href="case_report.html"><i class="material-icons">keyboard_arrow_right</i></a>
                 </li>
                 <li class="mdl-list__item">
-                    <span>AFP</span>
+                    <span class="mdl-list__item-primary-content">AFP</span>
                     <a class="mdl-list__item-primary-action" href="case_report.html"><i class="material-icons">keyboard_arrow_right</i></a>
                 </li>
                 <li class="mdl-list__item">
-                    <span>NNT</span>
+                    <span class="mdl-list__item-primary-content">NNT</span>
                     <a class="mdl-list__item-primary-action" href="case_report.html"><i class="material-icons">keyboard_arrow_right</i></a>
                 </li>
                 <li class="mdl-list__item">
-                    <span>Diphtheria</span>
+                    <span class="mdl-list__item-primary-content">Diphtheria</span>
                     <a class="mdl-list__item-primary-action" href="case_report.html"><i class="material-icons">keyboard_arrow_right</i></a>
                 </li>
             </ul>
         </div>
     </main>
 </div>
+<script>
+$(function() {
+   $("ul.mdl-list li").on('click', function() {
+       console.log('click');
+   })
+});
+</script>
 </body>
 </html>

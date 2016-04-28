@@ -5,7 +5,7 @@
 
     <link rel="stylesheet" href="./vendor/material/material.min.css">
     <link ref="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./vendor/getmdl-select.min.css"/>
+    <link rel="stylesheet" href="./bower_components/getmdl-select/getmdl-select.min.css"/>
     <link rel="stylesheet"
           href="./bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -19,6 +19,9 @@
     <script src="./bower_components/getmdl-select/getmdl-select.min.js"></script>
     <script src="./bower_components/momentjs/moment.js"></script>
     <script src="./bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <script src="./bower_components/jquery-serialize-object/jquery.serialize-object.js"></script>
+
+    <script src="./bower_components/momentjs/moment.js"></script>
 
     <link rel="stylesheet" href="main.css">
 
@@ -50,25 +53,25 @@
         </nav>
     </div>
     <main class="mdl-layout__content">
-        <form class="page-content" style="padding: 8px 8px 8px 8px;">
+        <form id="event_form" class="page-content" style="padding: 8px 8px 8px 8px;">
 
 
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                <input type="radio" id="option-1" class="mdl-radio__button" name="options" value="1" checked>
+                <input type="radio" id="option-1" class="mdl-radio__button" name="type_report" value="unusual" checked>
                 <span class="mdl-radio__label">Unusual Event</span>
             </label>
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                <input type="radio" id="option-2" class="mdl-radio__button" name="options" value="2">
+                <input type="radio" id="option-2" class="mdl-radio__button" name="type_report" value="cluster">
                 <span class="mdl-radio__label">Cluster</span>
             </label>
             <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
-                <input type="radio" id="option-3" class="mdl-radio__button" name="options" value="3">
-                <span class="mdl-radio__label">Diaster</span>
+                <input type="radio" id="option-3" class="mdl-radio__button" name="type_report" value="disaster">
+                <span class="mdl-radio__label">Disaster</span>
             </label>
 
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                <input class="mdl-textfield__input mdl-textfield--full-width" value="" type="text" id="disease" readonly
+                <input class="mdl-textfield__input mdl-textfield--full-width" value="" name="disease" type="text" id="disease" readonly
                        tabIndex="-1" data-val="BLR"/>
                 <label class="mdl-textfield__label" for="disease">Disease</label>
                 <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="disease">
@@ -90,19 +93,19 @@
 
             <!-- number of sick people -->
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="number" id="sick">
+                <input class="mdl-textfield__input" name="num_sick" type="number" id="sick">
                 <label class="mdl-textfield__label" for="sick">Number of sick people</label>
             </div>
 
 
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="number" id="death">
+                <input class="mdl-textfield__input" name="num_death" type="number" id="death">
                 <label class="mdl-textfield__label" for="death">Number of death people</label>
             </div>
 
 
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="where">
+                <input class="mdl-textfield__input" name="location" type="text" id="where">
                 <label class="mdl-textfield__label" for="where">Location</label>
             </div>
 
@@ -112,12 +115,12 @@
 
 
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="date">
+                <input class="mdl-textfield__input" name="date_event" type="text" id="date">
                 <label class="mdl-textfield__label" for="date">Date</label>
             </div>
 
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6" id="what"></textarea>
+                <textarea class="mdl-textfield__input" name="description" type="text" rows="3" maxrows="6" id="what"></textarea>
                 <label class="mdl-textfield__label" for="what">Finding</label>
             </div>
 
@@ -154,6 +157,40 @@
             title: 'Hello World!'
         });
     };
+    function generateLatLng() {
+        lat = 17.013721;
+        lng = 95.987924;
+
+        lat = lat + Math.floor(Math.random()*10000000) / 10000000;
+        lng = lng + Math.floor(Math.random()*10000000) / 10000000;
+
+        return lat + ',' + lng;
+    }
+
+    $('#event_form').submit(function(evt) {
+        console.log('submit');
+
+        data = $('#event_form').serializeObject();
+        data.latlng = generateLatLng();
+        data.report_date = moment().toISOString().substring(0,10);
+
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function(data){
+                console.log("succeeded");
+            },
+            error: function(){
+                console.log("failed");
+            },
+            processData: false,
+            type: 'POST',
+            url: 'http://52.201.204.236:9200//epihack/event-report/'
+        });
+
+        evt.preventDefault();
+    })
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap">
 </script>
