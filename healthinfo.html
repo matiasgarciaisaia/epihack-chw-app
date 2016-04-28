@@ -3,15 +3,38 @@
     <link rel="stylesheet" href="./vendor/material/material.min.css">
     <script src="./vendor/material/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<<<<<<< Updated upstream
     <link rel="stylesheet" href="main.css">
+=======
+      <style>
+          .full {
+              width: 100%;
+          }
+
+          .mag{
+              margin-top: 10px;
+              margin-bottom: 10px;
+          }
+
+          .pad{
+              padding-left: 10px;
+              padding-right: 10px;
+          }
+
+      </style>
+>>>>>>> Stashed changes
   </head>
   <body>
     <!-- Always shows a header, even in smaller screens. -->
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
           <span class="mdl-layout-title">Health information</span>
+        </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a href="#disease" class="mdl-layout__tab is-active">Disease</a>
+          <a href="#symptom" class="mdl-layout__tab">Symptom</a>
         </div>
       </header>
       <div class="mdl-layout__drawer">
@@ -27,7 +50,47 @@
       </div>
       <main class="mdl-layout__content">
         <div class="page-content">
-          Here goes the health info page!
+            <section class="mdl-layout__tab-panel is-active" id="disease">
+                <div class="page-content">
+                    <div class="pad">
+                        <a href="#">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full mag">
+                                Diptheria
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full mag">
+                                Dangue
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full mag">
+                                Allergy
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full mag">
+                                Diarrhea
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full mag">
+                                H1N1
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored full mag">
+                                Flu
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="symptom">
+                <div class="page-content">
+                    This is symptom
+                </div>
+            </section>
         </div>
       </main>
     </div>
