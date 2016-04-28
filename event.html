@@ -131,6 +131,12 @@
             </div>
 
 
+            <div id="save-snackbar" class="mdl-js-snackbar mdl-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button"></button>
+            </div>
+
+
         </form>
     </main>
 </div>
@@ -181,6 +187,11 @@
             dataType: 'json',
             success: function(data){
                 console.log("succeeded");
+                var obj = {
+                    message: 'Save Success.',
+                    timeout: 2000
+                }
+                document.querySelector('#save-snackbar').MaterialSnackbar.showSnackbar(obj);
             },
             error: function(){
                 console.log("failed");
