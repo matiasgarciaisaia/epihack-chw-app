@@ -106,7 +106,7 @@
 
     $(document).ready(function() {
 
-      $.get('http://52.201.204.236:9200/epihack/volunteer_event/_search?size=1000', function(data){
+      $.get('http://52.201.204.236:9200/epihack/volunteer_event/_search?size=1000&sort=created_at:desc', function(data){
         var hits = data.hits.hits;
         $(hits).each(function(hitIndex) {
           var hitSource = hits[hitIndex]["_source"];
