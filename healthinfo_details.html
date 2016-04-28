@@ -1,0 +1,220 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./vendor/material/material.min.css">
+    <script src="./vendor/material/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="main.css">
+    <style>
+
+        .pad {
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        .hd {
+            display: none;
+        }
+
+        .title {
+            background-color: #F4BC00;
+            color: white;
+            padding: 8px;
+            margin-top: 24px;
+        }
+
+        .rt {
+            float: right;
+            font-size: 3em;
+        }
+
+        .bm {
+            border-style: solid;
+            border-color: #F4BC00;
+        }
+
+
+    </style>
+</head>
+<body>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Health information</span>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Health-a-thon</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="index.html">Home</a>
+            <a class="mdl-navigation__link" href="inbox.html">Inbox</a>
+            <a class="mdl-navigation__link" href="immediate_report.html">Report</a>
+            <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
+            <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
+            <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content pad">
+
+            <div id="ammd" class="hd">
+
+                <div>
+                    <div onclick="toggle_visibility('case_definitions', 'cd')">
+                        <div class="title" style="margin-top: 10px;"><b>Case Definitions</b>
+                            <div id="cd" class="rt">+</div>
+                        </div>
+                    </div>
+                    <div id="case_definitions" class="hd pad bm">
+                        loose motion (fluid stool) more than three time within 24 hours / with or without some
+                        dehydration means ( dry mouth, thirsty, rapid pulse rate)
+                    </div>
+                </div>
+
+                <div>
+                    <div onclick="toggle_visibility('signs_symptoms', 'ss')">
+                        <div class="title"><b>Signs & Symptoms</b>
+                            <div id="ss" class="rt">+</div>
+                        </div>
+                    </div>
+                    <div id="signs_symptoms" class="hd pad bm">
+                        <ul>
+                            <li>abdominal discomfort</li>
+                            <li>abdominal pain</li>
+                            <li>nausea and vomiting</li>
+                            <li>dizziness</li>
+                            <li>profuse sweating</li>
+                            <li>faint</li>
+                            <li>loose motion with watery or mucus</li>
+                            <li>breathlessness</li>
+                            <li>fever</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div onclick="toggle_visibility('pcm', 'pm')">
+                        <div class="title"><b>Preventions & Control Measeuremesnt</b>
+                            <div id="pm" class="rt">+</div>
+                        </div>
+                    </div>
+                    <div id="pcm" class="hd pad bm">
+                        treatment ** timely inform, fluid replacement (ORS), timely referral / prevention and control **
+                        vaccination, water senitation, proper waste disposal, timely information, coordination and
+                        coorporation with local residents, health education to public
+
+                        <iframe width="368" height="315" src="https://www.youtube.com/embed/Oyt90LI7lxw" frameborder="0"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+
+                <div>
+                    <div onclick="toggle_visibility('complication', 'cm')">
+                        <div class="title"><b>Complication</b>
+                            <div id="cm" class="rt">+</div>
+                        </div>
+                    </div>
+                    <div id="complication" class="hd pad bm">
+                        hypovolumic shock and death, can transmitt to others as a outbreak (public acquired disease)
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="asd" class="hd">
+
+                <div>
+                    <div onclick="toggle_visibility('case_definitionss', 'cds')">
+                        <div class="title" style="margin-top: 10px;"><b>Case Definitions</b>
+                            <div id="cds" class="rt">+</div>
+                        </div>
+                    </div>
+                    <div id="case_definitionss" class="hd pad bm">
+                        Severe loose motion (fluid stool) with severe dehydration means (thirsty, sucken eye, less
+                        urination, skin goes back slowly, fatigue and weakness)
+                    </div>
+                </div>
+
+                <div>
+                    <div onclick="toggle_visibility('signs_symptomss', 'sss')">
+                        <div class="title"><b>Signs & Symptoms</b>
+                            <div id="sss" class="rt">+</div>
+                        </div>
+                    </div>
+                    <div id="signs_symptomss" class="hd pad bm">
+                        <ul>
+                            <li>abdominal discomfort</li>
+                            <li>abdominal pain</li>
+                            <li>nausea and vomiting</li>
+                            <li>dizziness</li>
+                            <li>profuse sweating</li>
+                            <li>faint</li>
+                            <li>loose motion with watery or mucus</li>
+                            <li>breathlessness</li>
+                            <li>cold and clammy extrimities</li>
+                            <li>low BP</li>
+                            </li>sunken eyes</li>
+                            <li>skin goes back slowly</li>
+                            <li>rapid pulse rate</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <div onclick="toggle_visibility('pcms', 'pms')">
+                        <div class="title"><b>Preventions & Control Measeuremesnt</b>
+                            <div id="pms" class="rt">+</div>
+                        </div>
+                    </div>
+                    <div id="pcms" class="hd pad bm">
+                        treatment ** timely inform, fluid replacement (ORS), timely referral / prevention and control **
+                        vaccination, water senitation, proper waste disposal, timely information, coordination and
+                        coorporation with local residents, health education to public
+                    </div>
+                </div>
+
+                <div>
+                    <div onclick="toggle_visibility('complications', 'cms')">
+                        <div class="title"><b>Complication</b>
+                            <div id="cms" class="rt">+</div>
+                        </div>
+                    </div>
+                    <div id="complications" class="hd pad bm">
+                        shock and death, can transmitt to others as a outbreak (public acquire disease)
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+</div>
+
+<script type="text/javascript">
+    <!--
+    function toggle_visibility(id, sign) {
+        var e = document.getElementById(id);
+        var s = document.getElementById(sign);
+        if (e.style.display == 'block') {
+            e.style.display = 'none';
+            s.innerHTML = "+";
+        } else {
+            e.style.display = 'block';
+            s.innerHTML = "-";
+        }
+    }
+
+    var hash = window.location.hash.substring(1);
+    document.getElementById(hash).style.display = 'block';
+
+    console.log(hash);
+
+
+    //-->
+</script>
+
+</body>
+</html>

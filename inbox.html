@@ -6,6 +6,113 @@
     <script src="./vendor/material/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="main.css">
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./vendor/audiojs/audio.min.js"></script>
+    <script type="text/javascript">
+    var volunteers = {
+      "+1 525 1242 325": {
+        "name": "Channa Ly",
+        "picture": "data/images/channa-100px.jpg"
+      },
+      "+1 115 215 3333": {
+        "name": "Mouyleng Lim",
+        "picture": "data/images/mouyleng-100px.jpg"
+      },
+      "+1 115 215 553233": {
+        "name": "Sona Rath",
+        "picture": "data/images/sona-100px.jpg"
+      },
+      "": {
+        "name": "Unknown",
+        // "picture": "data/images/mgarcia-100px.jpg"
+      }
+    }
+
+    var cleanPhoneNumber = function(number) {
+      if(number && number.length > 0) {
+        return number;
+      } else {
+        return "+14252698378";
+      }
+    };
+
+    var createInboxMessage = function(messageIndex, message) {
+      var volunteer = volunteers[message.phone_number];
+      if(volunteer === undefined) {
+        volunteer = volunteers[""];
+      }
+      var secondLine = null;
+      var actionButtons = $('<span>').attr('class', 'mdl-list__item-secondary-action');
+      if(message.audio) {
+        secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').append(
+          $('<audio>').attr('src', message.audio).attr('preload', false)
+        )
+      } else {
+        secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').text(message.message);
+      }
+      actionButtons.append(
+        $('<button>')
+          .attr('class', 'mdl-button mdl-js-button mdl-button--icon')
+          .attr('id', 'demo-menu-lower-right-' + messageIndex)
+          .append(
+            $('<i>').attr('class', 'material-icons').text('more_vert')
+          )
+      ).append(
+        $('<ul>')
+          .attr('class', 'mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect')
+          .attr('for', 'demo-menu-lower-right-' + messageIndex)
+          .append(
+            $('<a>').attr('href', 'event.html?message=' + JSON.stringify(message)).append(
+              $('<li>').attr('class', 'mdl-menu__item').text("Report the event")
+            )
+          )
+          .append(
+            $('<a>').attr('href', 'tel:' + cleanPhoneNumber(message.phone_number)).append(
+              $('<li>').attr('class', 'mdl-menu__item').text("Call volunteer")
+            )
+          )
+          .append(
+            $('<li>').attr('class', 'mdl-menu__item').text("Dismiss message")
+          )
+      );
+      var volunteerPicture = null;
+      if(volunteer.picture) {
+        volunteerPicture = $('<img>').attr('src', volunteer.picture).attr('class', 'mdl-list__item-avatar')
+      } else {
+        volunteerPicture = $('<i>').attr('class', 'material-icons mdl-list__item-avatar').text('person')
+      }
+      return $('<li>').attr('class', 'mdl-list__item mdl-list__item--three-line').append(
+        $('<span>').attr('class', 'mdl-list__item-primary-content').append(
+          volunteerPicture
+        ).append(
+          $('<span>').text(volunteer.name)
+        ).append(
+          secondLine
+        ).append(
+          $('<span>').attr('class', 'mdl-list__item-text-body').text(message.on_set_date)
+        )
+      ).append(
+        actionButtons
+      );
+    }
+
+    $(document).ready(function() {
+
+      $.get('http://52.201.204.236:9200/epihack/volunteer_event/_search?size=1000', function(data){
+        var hits = data.hits.hits;
+        $(hits).each(function(hitIndex) {
+          var hitSource = hits[hitIndex]["_source"];
+          $('#inbox-list').append(
+            createInboxMessage(hitIndex, hitSource)
+          );
+        });
+        componentHandler.upgradeAllRegistered();
+        audiojs.events.ready(function() {
+          audiojs.createAll();
+        });
+      });
+    });
+    </script>
   </head>
   <body>
     <!-- Always shows a header, even in smaller screens. -->
@@ -21,15 +128,16 @@
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="index.html">Home</a>
           <a class="mdl-navigation__link selected" href="#">Inbox</a>
-          <a class="mdl-navigation__link" href="immediate_report.html">Report</a>
-          <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
+          <a class="mdl-navigation__link" href="immediate_report.html">Immediately Report</a>
+          <a class="mdl-navigation__link" href="weekly_report.html">Weekly Report</a>
           <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
           <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
         </nav>
       </div>
       <main class="mdl-layout__content">
         <div class="page-content">
-          Here goes the inbox listing
+          <ul class="mdl-list" id="inbox-list">
+          </ul>
         </div>
       </main>
     </div>
