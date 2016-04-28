@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="main.css">
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./vendor/audiojs/audio.min.js"></script>
+    <script src="./bower_components/jquery-timeago/jquery.timeago.js"></script>
+    <style>
+    time.timeago {
+        font-size: 0.75em;
+    }
+    </style>
     <script type="text/javascript">
     var volunteers = {
       "+1 525 1242 325": {
@@ -51,6 +57,8 @@
         secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').text(message.message);
       }
       actionButtons.append(
+        $('<time>').attr('class', 'timeago').attr('datetime', message.on_set_date).text(message.on_set_date)
+      ).append(
         $('<button>')
           .attr('class', 'mdl-button mdl-js-button mdl-button--icon')
           .attr('id', 'demo-menu-lower-right-' + messageIndex)
@@ -110,6 +118,7 @@
         audiojs.events.ready(function() {
           audiojs.createAll();
         });
+        $("time.timeago").timeago();
       });
     });
     </script>
