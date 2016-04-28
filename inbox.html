@@ -6,27 +6,35 @@
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./vendor/audiojs/audio.min.js"></script>
     <script type="text/javascript">
+    var volunteers = {
+      "+1 525 1242 325": {
+        "name": "Channa Ly",
+        "picture": "data/images/channa-100px.jpg"
+      },
+      "+1 115 215 3333": {
+        "name": "Mouyleng Lim",
+        "picture": "data/images/mouyleng-100px.jpg"
+      },
+      "+1 115 215 553233": {
+        "name": "Sona Rath",
+        "picture": "data/images/sona-100px.jpg"
+      }
+    }
     var inboxData = [
       {
         "type": "text",
-        "name": "Khan Wen Lu",
-        "picture": "http://localhost:8000/images/khan-wen-lu.jpg",
         "phone": "+1 525 1242 325",
         "message": "Today three kids skipped classes because they were feeling sick. It seems they ate some bad food last night or something.",
         "date": "2016-04-27 11:01:02"
       },
       {
         "type": "voice",
-        "name": "May Lun See",
-        "picture": "http://localhost:8000/images/may-lun-see.jpg",
         "phone": "+1 115 215 3333",
         "audio": "data/audios/test.mp3",
         "date": "2016-04-27 16:01:02"
       },
       {
         "type": "voice",
-        "name": "Jay Men Wey",
-        "picture": "http://localhost:8000/images/may-lun-see.jpg",
         "phone": "+1 115 215 553233",
         "audio": "data/audios/long-message.mp3",
         "date": "2016-04-27 16:01:02"
@@ -38,6 +46,7 @@
     $(document).ready(function() {
       $(inboxData).each(function(messageIndex) {
         var message = inboxData[messageIndex];
+        var volunteer = volunteers[message.phone];
         var secondLine = null;
         var actionButtons = $('<span>').attr('class', 'mdl-list__item-secondary-action');
         if(message.type == 'text') {
@@ -72,12 +81,18 @@
               $('<li>').attr('class', 'mdl-menu__item').text("Dismiss message")
             )
         );
+        var volunteerPicture = null;
+        if(volunteer.picture) {
+          volunteerPicture = $('<img>').attr('src', volunteer.picture).attr('class', 'mdl-list__item-avatar')
+        } else {
+          volunteerPicture = $('<i>').attr('class', 'material-icons mdl-list__item-avatar').text('person')
+        }
         $('#inbox-list').append(
           $('<li>').attr('class', 'mdl-list__item mdl-list__item--three-line').append(
             $('<span>').attr('class', 'mdl-list__item-primary-content').append(
-              $('<i>').attr('class', 'material-icons mdl-list__item-avatar').text('person')
+              volunteerPicture
             ).append(
-              $('<span>').text(message.name)
+              $('<span>').text(volunteer.name)
             ).append(
               secondLine
             ).append(
