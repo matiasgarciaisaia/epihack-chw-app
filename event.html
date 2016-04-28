@@ -1,8 +1,28 @@
 <html>
   <head>
-    <link rel="stylesheet" href="./vendor/material/material.min.css">
-    <script src="./vendor/material/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+      <link rel="stylesheet" href="./vendor/material/material.min.css">
+      <link ref="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+      <link rel="stylesheet" href="./vendor/getmdl-select.min.css"/>
+      <link rel="stylesheet" href="./bower_components/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css"/>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+
+      <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+      <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="./vendor/material/material.min.js"></script>
+
+
+      <script src="./vendor/getmdl-select.min.js"></script>
+      <script src="./bower_components/momentjs/moment.js"></script>
+      <script src="./bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+
+
+
   </head>
   <body>
     <!-- Always shows a header, even in smaller screens. -->
@@ -25,10 +45,47 @@
         </nav>
       </div>
       <main class="mdl-layout__content">
-        <div class="page-content">
-          Here goes the event report page!
-        </div>
+        <form class="page-content">
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+              <input class="mdl-textfield__input mdl-textfield--full-width" value="" type="text" id="disease" readonly tabIndex="-1" data-val="BLR"/>
+              <label class="mdl-textfield__label" for="disease">Disease</label>
+              <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="disease">
+                <li class="mdl-menu__item" data-val="BLR">Influenza</li>
+                <li class="mdl-menu__item" data-val="RUS">TB</li>
+              </ul>
+            </div>
+
+            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="date">
+              <label class="mdl-textfield__label" for="date">Date</label>
+            </div>
+
+
+
+            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="where">
+              <label class="mdl-textfield__label" for="where">Where</label>
+            </div>
+
+            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+  <textarea class="mdl-textfield__input" type="text" rows="3" maxrows="6"
+            id="what"></textarea>
+              <label class="mdl-textfield__label" for="what">What</label>
+            </div>
+
+            <div>
+              <!-- Accent-colored raised button with ripple -->
+              <button class=" mdl-textfield--full-width mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Button
+              </button>
+            </div>
+
+        </form>
       </main>
     </div>
+    <script>
+      $('#date').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+    </script>
   </body>
 </html>
