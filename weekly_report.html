@@ -46,8 +46,8 @@
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="index.html">Home</a>
             <a class="mdl-navigation__link" href="inbox.html">Inbox</a>
-            <a class="mdl-navigation__link selected" href="immediate_report.html">Immediately Report</a>
-            <a class="mdl-navigation__link" href="weekly_report.html">Weekly Report</a>
+            <a class="mdl-navigation__link" href="immediate_report.html">Immediately Report</a>
+            <a class="mdl-navigation__link selected" href="weekly_report.html">Weekly Report</a>
             <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
             <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
         </nav>
@@ -87,6 +87,7 @@
                     <li class="mdl-menu__item" data-val="Whooping cough">Whooping cough</li>
                     <li class="mdl-menu__item" data-val="SARI">SARI</li>
                     <li class="mdl-menu__item" data-val="ILI">ILI</li>
+
                 </ul>
             </div>
 
@@ -167,31 +168,7 @@
         return lat + ',' + lng;
     }
 
-    $('#event_form').submit(function(evt) {
-        console.log('submit');
 
-        data = $('#event_form').serializeObject();
-        data.latlng = generateLatLng();
-        data.date_report_summitted = moment().toISOString();
-        data.report_by = "Nay Tun Thein Nyunt";
-
-        $.ajax({
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            dataType: 'json',
-            success: function(data){
-                console.log("succeeded");
-            },
-            error: function(){
-                console.log("failed");
-            },
-            processData: false,
-            type: 'POST',
-            url: 'http://52.201.204.236:9200//epihack/event-report/'
-        });
-
-        evt.preventDefault();
-    })
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap">

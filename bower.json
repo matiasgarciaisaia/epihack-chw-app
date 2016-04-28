@@ -5,7 +5,16 @@
     "jquery": "~2.1.4",
     "bootstrap-material-datetimepicker": "~2.7.1",
     "momentjs": "2.10.6",
-    "react": "^15.0.1"
+    "react": "^15.0.1",
+    "getmdl-select": "*",
+    "jquery-serialize-object": "^2.5.0",
+    "handlebars": "^4.0.5",
+    "jPlayer": "jplayer#^2.9.2"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+  },
+  "resolutions": {
+    "jquery": "~2.1.4"
+  }
 }
