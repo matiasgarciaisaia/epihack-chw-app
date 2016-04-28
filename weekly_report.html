@@ -23,12 +23,22 @@
 
     <script src="./bower_components/momentjs/moment.js"></script>
 
+    <script src="./bower_components/handlebars/handlebars.min.js"></script>
+
     <link rel="stylesheet" href="main.css">
 
     <style>
-        #map {
-            height: 300px;
+
+        .alert-bar {
+            background-color: #75F0FD;
         }
+
+        .demo-card-square {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
     </style>
 
 </head>
@@ -38,7 +48,7 @@
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Report</span>
+            <span class="mdl-layout-title">Weekly Report</span>
         </div>
     </header>
     <div class="mdl-layout__drawer">
@@ -55,74 +65,20 @@
     <main class="mdl-layout__content">
         <form id="event_form" class="page-content" style="padding: 8px 8px 8px 8px;">
 
-
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-1">
-                <input type="radio" id="option-1" class="mdl-radio__button" name="type_report" value="unusual" checked>
-                <span class="mdl-radio__label">Unusual Event</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-2">
-                <input type="radio" id="option-2" class="mdl-radio__button" name="type_report" value="cluster">
-                <span class="mdl-radio__label">Cluster</span>
-            </label>
-            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="option-3">
-                <input type="radio" id="option-3" class="mdl-radio__button" name="type_report" value="disaster">
-                <span class="mdl-radio__label">Disaster</span>
-            </label>
-
-
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
-                <input class="mdl-textfield__input mdl-textfield--full-width" value="" name="disease" type="text" id="disease" readonly
-                       tabIndex="-1" data-val="BLR"/>
-                <label class="mdl-textfield__label" for="disease">Disease</label>
-                <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu" for="disease">
-                    <li class="mdl-menu__item" data-val="unknown">Unknown</li>
-                    <li class="mdl-menu__item" data-val="Acute Diarrhoea">Acute Diarrhoea</li>
-                    <li class="mdl-menu__item" data-val="Measles">Measles</li>
-                    <li class="mdl-menu__item" data-val="Fever with Rash">Fever with Rash</li>
-                    <li class="mdl-menu__item" data-val="Acute Meningitis">Acute Meningitis</li>
-                    <li class="mdl-menu__item" data-val="Acute Encephalitis">Acute Encephalitis</li>
-                    <li class="mdl-menu__item" data-val="Acute Jaundice">Acute Jaundice</li>
-                    <li class="mdl-menu__item" data-val="Dysentery">Dysentery</li>
-                    <li class="mdl-menu__item" data-val="Food Poisoning">Food Poisoning</li>
-                    <li class="mdl-menu__item" data-val="Whooping cough">Whooping cough</li>
-                    <li class="mdl-menu__item" data-val="SARI">SARI</li>
-                    <li class="mdl-menu__item" data-val="ILI">ILI</li>
-
-                </ul>
-            </div>
-
-            <!-- number of sick people -->
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" name="num_sick" type="number" id="sick">
-                <label class="mdl-textfield__label" for="sick">Number of sick people</label>
-            </div>
-
-
-            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" name="num_death" type="number" id="death">
-                <label class="mdl-textfield__label" for="death">Number of death people</label>
-            </div>
-
-
-            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" name="location" type="text" id="where">
-                <label class="mdl-textfield__label" for="where">Location</label>
-            </div>
-
-            <div id="map">
-
-            </div>
-
-
-            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" name="date_event" type="text" id="date">
-                <label class="mdl-textfield__label" for="date">Date</label>
+                <input class="mdl-textfield__input" name="date_from" type="text" id="date_f">
+                <label class="mdl-textfield__label" for="date_f">From Date</label>
             </div>
 
             <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
-                <textarea class="mdl-textfield__input" name="description" type="text" rows="3" maxrows="6" id="what"></textarea>
-                <label class="mdl-textfield__label" for="what">Finding</label>
+                <input class="mdl-textfield__input" name="date_through" type="text" id="date_t">
+                <label class="mdl-textfield__label" for="date_t">Through Date</label>
             </div>
+
+
+
+            <div id="disease_container"></div>
+
 
             <div>
                 <!-- Accent-colored raised button with ripple -->
@@ -135,8 +91,68 @@
         </form>
     </main>
 </div>
+<script id="disease-template" type="text/x-handlebars-template">
+    <div class="demo-card-square mdl-card mdl-shadow--2dp">
+
+        <div class="mdl-card__supporting-text alert-bar">
+            <span style="font-weight: 900; font-size: 20px; color: black;"><i class="material-icons">layers</i>{{name}}</span>
+        </div>
+
+        <div class="mdl-card__supporting-text">
+
+            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="{{id}}_case" type="text" id="{{id}}_case" value="0">
+                <label class="mdl-textfield__label" for="{{id}}_case">No. Case</label>
+            </div>
+
+
+            <div class="mdl-textfield mdl-textfield--full-width mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" name="{{id}}_death" type="text" id="{{id}}_death" value="0">
+                <label class="mdl-textfield__label" for="{{id}}_death">No. Death</label>
+            </div>
+
+        </div>
+    </div>
+
+</script>
 <script>
-    $('#date').bootstrapMaterialDatePicker({weekStart: 0, time: false});
+    $('#date_f').bootstrapMaterialDatePicker({weekStart: 0, time: false});
+    $('#date_t').bootstrapMaterialDatePicker({weekStart: 0, time: false});
+
+
+    diseases = [
+        {
+            id: 'measles',
+            name: 'Measles'
+        },
+        {
+            id: 'acute_diarrhoea',
+            name: 'Acute Diarrhoea'
+        },
+        {
+            id: 'afp',
+            name: 'AFP'
+        },
+        {
+            id: 'nnt',
+            name: 'NNT'
+        },
+        {
+            id: 'diphtheria',
+            name: 'Diphtheria'
+        }
+    ];
+
+    $(function() {
+        var source   = $("#disease-template").html();
+        var template = Handlebars.compile(source);
+        var htmls = [];
+        $.each(diseases, function(idx, item) {
+            htmls.push(template(item));
+        });
+
+        $("#disease_container").html(htmls.join(''));
+    });
 
     function initMap() {
         console.log( "ready!" );
@@ -171,8 +187,6 @@
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARzKBfEkEAhy84FAb2UgF-FOG7whCWX9g&callback=initMap">
-</script>
 
 </body>
 </html>
