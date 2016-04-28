@@ -9,12 +9,11 @@
     "getmdl-select": "*",
     "jquery-serialize-object": "^2.5.0",
     "handlebars": "^4.0.5",
-    "jPlayer": "jplayer#^2.9.2"
+    "jPlayer": "jplayer#^2.9.2",
+    "jquery-timeago": "^1.5.2"
   },
   "private": true,
-  "devDependencies": {
-    "getmdl-select": "*"
-  },
+  "devDependencies": {},
   "resolutions": {
     "jquery": "~2.1.4"
   }

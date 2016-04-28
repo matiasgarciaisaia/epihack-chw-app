@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="main.css">
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./vendor/audiojs/audio.min.js"></script>
+    <script src="./bower_components/jquery-timeago/jquery.timeago.js"></script>
+    <style>
+    time.timeago {
+        font-size: 0.75em;
+    }
+    </style>
     <script type="text/javascript">
     var volunteers = {
       "+1 525 1242 325": {
@@ -51,6 +57,8 @@
         secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').text(message.message);
       }
       actionButtons.append(
+        $('<time>').attr('class', 'timeago').attr('datetime', message.on_set_date).text(message.on_set_date)
+      ).append(
         $('<button>')
           .attr('class', 'mdl-button mdl-js-button mdl-button--icon')
           .attr('id', 'demo-menu-lower-right-' + messageIndex)
@@ -98,7 +106,7 @@
 
     $(document).ready(function() {
 
-      $.get('http://52.201.204.236:9200/epihack/volunteer_event/_search?size=1000', function(data){
+      $.get('http://52.201.204.236:9200/epihack/volunteer_event/_search?size=1000&sort=created_at:desc', function(data){
         var hits = data.hits.hits;
         $(hits).each(function(hitIndex) {
           var hitSource = hits[hitIndex]["_source"];
@@ -110,6 +118,7 @@
         audiojs.events.ready(function() {
           audiojs.createAll();
         });
+        $("time.timeago").timeago();
       });
     });
     </script>
@@ -127,8 +136,8 @@
         <nav class="mdl-navigation">
           <a class="mdl-navigation__link" href="index.html">Home</a>
           <a class="mdl-navigation__link selected" href="#">Inbox</a>
-          <a class="mdl-navigation__link" href="immediate_report.html">Report</a>
-          <a class="mdl-navigation__link" href="indicator.html">Indicator</a>
+          <a class="mdl-navigation__link" href="immediate_report.html">Immediately Report</a>
+          <a class="mdl-navigation__link" href="weekly_report.html">Weekly Report</a>
           <a class="mdl-navigation__link" href="healthinfo.html">Health info</a>
           <a class="mdl-navigation__link" href="volunteers.html">Volunteers</a>
         </nav>
