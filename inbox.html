@@ -60,7 +60,7 @@
       var actionButtons = $('<span>').attr('class', 'mdl-list__item-secondary-action');
       if(message.audio) {
         secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').append(
-          $('<audio>').attr('src', message.audio).attr('preload', false)
+          $('<audio>').attr('src', 'http://52.201.204.236:4567/?q=' + message.audio).attr('preload', false)
         )
       } else {
         secondLine = $('<span>').attr('class', 'mdl-list__item-text-body').text(message.message);
